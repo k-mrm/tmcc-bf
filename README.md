@@ -38,5 +38,8 @@ output
 Hello, world!
 ```
 
+## LICENSE
+[This software is released under the MIT License.](https://github.com/k-mrm/tmcc-bf/blob/master/LICENSE)
+
 ## Author
 [k-mrm](https://github.com/k-mrm)
