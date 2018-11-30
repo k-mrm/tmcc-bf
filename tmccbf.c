@@ -14,10 +14,10 @@ int main(int argc, char **argv) {
     char *file_ex;
 
     if((file_ex = strstr(argv[1], ".")) == NULL) {
-        fprintf(stderr, "[+] FileType: this is not .tmcc\n");
+        fprintf(stderr, "[error] FileType: this is not .tmcc\n");
     } else {
         if(strcmp(file_ex, ".tmcc")) {
-            fprintf(stderr, "[+] FileType: this is not .tmcc, but %s\n", file_ex);
+            fprintf(stderr, "[error] FileType: this is not .tmcc, but %s\n", file_ex);
             exit(1);
         }
     }
@@ -43,13 +43,15 @@ int main(int argc, char **argv) {
     }
     exec(contents);
 
-    free(strp);
+    free(contents);
     fclose(f);
 
     return 0;
 }
 
 char *contents2var(FILE *file_contents) {
+    char *strp;
+
     fseek(file_contents, 0, SEEK_END);
     int file_size = ftell(file_contents);
 
@@ -58,13 +60,13 @@ char *contents2var(FILE *file_contents) {
     }
 
     if(file_size > MAX_LENGTH) {
-        fprintf(stderr, "[+] Size: File size too large.\n");
+        fprintf(stderr, "[error] Size: File size too large.\n");
         exit(1);
     }
 
 
     if((strp = malloc(file_size)) == NULL) {
-        fprintf(stderr,"[+] malloc error\n");
+        fprintf(stderr,"[error] malloc error\n");
         exit(1);
     }
 
@@ -77,6 +79,7 @@ char *contents2var(FILE *file_contents) {
     return strp;
 }
 
+//これしか思いつかんかった
 void str2tk(char *from_str) {
     str2plus(from_str);
     str2minus(from_str);
