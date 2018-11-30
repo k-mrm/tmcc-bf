@@ -5,7 +5,7 @@
     #include<stdlib.h>
     #include<stdbool.h>
 
-    #define MAX_LENGTH 1024
+    #define MAX_LENGTH 4096
     const char *tk_plus = "SMD";	        //+
     const char *tk_minus = "にゃんこ";	    //-
     const char *tk_gt = "しの";	        //>
@@ -15,10 +15,8 @@
     const char *tk_lb = "NEMO";             //[
     const char *tk_rb = "キュゥ";             //]
 
-    char *strp;
-    bool DEBUG_MODE = 0;
+    bool DEBUG_MODE = false;
 
-    extern void repl();
     extern char *contents2var(FILE *file_contents);
     extern void str2plus(char *from_str);
     extern void str2minus(char *from_str);
