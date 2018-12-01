@@ -1,20 +1,26 @@
 #include"tmccbf.h"
 
 int main(int argc, char **argv) {
-    if(argc != 2) {
-        if(argc == 3 || !strcmp(argv[2], "-d")) {
-            DEBUG_MODE = true;
-        } else {
-            fprintf(stderr, "[error] Uasge: tmccbf <filename> [option]\n");
+    char *file_in;
 
-            exit(1);
+    if(argc == 1) {
+        usage();
+    } else if(argc == 2) {
+        file_in = argv[1];
+    } else {
+        for(int i = 1; i < 3; i++) {
+            if(!strcmp(argv[i], "-d"))
+                DEBUG_MODE = true;
+            else
+                file_in = argv[i];
         }
     }
 
     char *file_ex;
 
-    if((file_ex = strstr(argv[1], ".")) == NULL) {
+    if((file_ex = strstr(file_in, ".")) == NULL) {
         fprintf(stderr, "[error] FileType: this is not .tmcc\n");
+        exit(1);
     } else {
         if(strcmp(file_ex, ".tmcc")) {
             fprintf(stderr, "[error] FileType: this is not .tmcc, but %s\n", file_ex);
@@ -24,8 +30,8 @@ int main(int argc, char **argv) {
 
     FILE* f;
 
-    if((f = fopen(argv[1], "r")) == NULL) {
-        fprintf(stderr, "[+] File: file open failed\n");
+    if((f = fopen(file_in, "r")) == NULL) {
+        fprintf(stderr, "[error] File: file open failed\n");
         exit(1);
     }
 
@@ -240,4 +246,10 @@ void exec(char *strin) {
             }
         }
     }
+}
+
+void usage() {
+    fprintf(stderr, "[error] Usage: tmccbf <filename> [option]\n");
+
+    exit(1);
 }
