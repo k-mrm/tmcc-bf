@@ -28,4 +28,5 @@
     extern void str2rb(char *from_str);
     extern void str2tk(char *from_str);
     extern void exec(char *strin);
+    extern void usage();
 #endif
