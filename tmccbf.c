@@ -202,19 +202,19 @@ void str2rb(char *from_str) {
 }
 
 void exec(char *strin) {
-    int strin_len;
-    strin_len = strlen(strin);
+    //int strin_len = strlen(strin);
 
-    if(strin_len > 30000) {
+    if(strlen(strin) > 30000) {
         fprintf(stderr, "[error] file size too large\n");
         exit(1);
     }
 
-    char *ptr;
-    if((ptr = (char*)calloc(strin_len, sizeof(char))) == NULL) {
+    char data[30000] = {0};
+    char *ptr = data;
+    /* if((ptr = (char *)calloc(strin_len, sizeof(char))) == NULL) {
         fprintf(stderr, "[error] calloc error");
         exit(1);
-    }
+    } */
     char current;
 
     for(int i = 0; strin[i] != 0; i++) {
@@ -250,6 +250,5 @@ void exec(char *strin) {
 
 void usage() {
     fprintf(stderr, "[error] Usage: tmccbf <filename> [option]\n");
-
     exit(1);
 }
