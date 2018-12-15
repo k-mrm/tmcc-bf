@@ -202,8 +202,6 @@ void str2rb(char *from_str) {
 }
 
 void exec(char *strin) {
-    //int strin_len = strlen(strin);
-
     if(strlen(strin) > 30000) {
         fprintf(stderr, "[error] file size too large\n");
         exit(1);
@@ -211,11 +209,8 @@ void exec(char *strin) {
 
     char data[30000] = {0};
     char *ptr = data;
-    /* if((ptr = (char *)calloc(strin_len, sizeof(char))) == NULL) {
-        fprintf(stderr, "[error] calloc error");
-        exit(1);
-    } */
     char current;
+    int nest;
 
     for(int i = 0; strin[i] != 0; i++) {
         current = strin[i];
@@ -235,7 +230,7 @@ void exec(char *strin) {
         else if(current == '[')
             continue;
         else if(current == ']' && *ptr) {
-            int nest = 1;
+            nest = 1;
 
             while(nest > 0) {
                 current = strin[--i];
